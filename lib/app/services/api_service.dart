@@ -22,7 +22,7 @@ class APIService {
       }
     }
     debugPrint(
-        'Request ${api.tokenUri()} failed.\nResponse: ${response.statusCode} .');
+        'Request ${api.tokenUri()} failed.\nResponse: ${response.statusCode} ${response.reasonPhrase}.');
     throw response;
   }
 }
