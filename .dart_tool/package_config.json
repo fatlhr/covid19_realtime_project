@@ -68,6 +68,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "http",
+      "rootUri": "file:///Users/sagara-mac/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///Users/sagara-mac/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///Users/sagara-mac/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
       "packageUri": "lib/",
@@ -152,7 +164,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2022-06-25T08:13:02.181926Z",
+  "generated": "2022-06-25T09:46:14.891924Z",
   "generator": "pub",
   "generatorVersion": "2.14.0"
 }
