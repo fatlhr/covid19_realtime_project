@@ -1,0 +1,18 @@
+{
+      "rest-client.environmentVariables": {
+            "sandbox": {
+                  "baseUrl": "https://ncov2019-admin.firebaseapp.com",
+                  "auth":"48dce214d25d582eb16f28b17236651fa5204b7220a4de612c0163af87c4664c",
+                  "access_token": "4ff598faec5aad10b973952471c8ed448e0c1bd41cf976afff4b85bbc889dbe3"                
+            },
+            "production": {
+           }
+      },
+      "dart.flutterSdkPath": ".fvm/flutter_sdk",
+      "search.exclude": {
+        "**/.fvm": true
+      },
+      "files.watcherExclude": {
+        "**/.fvm": true
+      }
+}
