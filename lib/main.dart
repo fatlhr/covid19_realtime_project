@@ -47,12 +47,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _accessToken = '*********************';
+  int _cases = 0;
+  int _deaths = 0;
 
-  void _showAccessToken() async {
+  void _updateData() async {
     final apiService = APIService(api: API.sandbox());
     final accessToken = await apiService.getAccessToken();
+    final cases = await apiService.getEndPointData(
+      accessToken: accessToken,
+      endpoint: Endpoint.cases,
+    );
+    final deaths = await apiService.getEndPointData(
+      accessToken: accessToken,
+      endpoint: Endpoint.deaths,
+    );
     setState(() {
       _accessToken = accessToken;
+      _cases = cases;
+      _deaths = deaths;
+    });
+  }
+
+  void _resetData() async {
+    setState(() {
+      _accessToken = "0";
+      _cases = 0;
+      _deaths = 0;
     });
   }
 
@@ -98,14 +118,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 //style: Theme.of(context).textTheme.display1,
               ),
             ),
+            const Text('Cases: '),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                _cases.toString(),
+                //style: Theme.of(context).textTheme.display1,
+              ),
+            ),
+            const Text('Deaths: '),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                _deaths.toString(),
+                //style: Theme.of(context).textTheme.display1,
+              ),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showAccessToken,
+        onPressed: _updateData,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      persistentFooterButtons: [
+        ElevatedButton(
+          child: const Text('Reset Data'),
+          onPressed: _resetData,
+        ),
+      ],
     );
   }
 }
