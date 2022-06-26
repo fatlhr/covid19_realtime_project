@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class APIService {
-  APIService({this.api});
+  APIService({required this.api});
   final API api;
 
   Future<String> getAccessToken() async {
@@ -17,6 +17,8 @@ class APIService {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final accessToken = data['access_token'];
+      print('---token--- \n response: ${response.statusCode}');
+      print('data:  ${data}');
       if (accessToken != null) {
         return accessToken;
       }
@@ -27,8 +29,8 @@ class APIService {
   }
 
   Future<int> getEndPointData({
-    @required String accessToken,
-    @required Endpoint endpoint,
+    required String accessToken,
+    required Endpoint endpoint,
   }) async {
     final uri = api.endpointUri(endpoint);
     final response = await http.get(
@@ -40,13 +42,17 @@ class APIService {
 
       if (data.isNotEmpty) {
         final Map<String, dynamic> endpointData = data[0];
-        final String responseJsonKey = _responseJsonKeys[endpoint];
+        final String responseJsonKey = _responseJsonKeys[endpoint]!;
         final int result = endpointData[responseJsonKey];
+        String date = endpointData['date'];
 
-        if (result != null) {
-          debugPrint('$uri: $result');
-          return result;
-        }
+        print('---endpoint--- \n response: ${response.statusCode}');
+        print('endpointData:  ${endpointData}');
+        print('result:  ${result}');
+        print('date:  $date');
+
+        debugPrint('$uri: $result');
+        return result;
       }
     }
     debugPrint(

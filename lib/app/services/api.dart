@@ -11,7 +11,7 @@ enum Endpoint {
 class API {
   final String apiKey;
 
-  API({this.apiKey});
+  API({required this.apiKey});
 
   factory API.sandbox() {
     return API(apiKey: APIKeys.ncovSandboxKey);

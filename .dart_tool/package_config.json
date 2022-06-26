@@ -161,10 +161,10 @@
       "name": "covid19_realtime_project",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.10"
+      "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-06-25T09:53:51.390324Z",
+  "generated": "2022-06-25T20:38:36.092114Z",
   "generator": "pub",
   "generatorVersion": "2.14.0"
 }
