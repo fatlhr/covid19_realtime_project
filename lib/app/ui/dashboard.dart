@@ -13,9 +13,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _cases = 0;
-  int _cases2 = 0;
-  int _data = 0;
+  EndpointsData? _endpointsData;
   @override
   void initState() {
     super.initState();
@@ -24,14 +22,10 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> _updateData() async {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
-    final cases = await dataRepository.getEndpointData(Endpoint.cases);
-    final cases2 = await dataRepository.getAllEndpointData();
-    final data = await dataRepository.getAllEndpointData();
-    
+    final endpointsData = await dataRepository.getAllEndpointsData();
+
     setState(() {
-      _cases = cases;
-      //_cases2 = cases2.cases ?? 0;
-      _data = data.casesSuspected;
+      _endpointsData = endpointsData;
     });
   }
 
@@ -47,18 +41,19 @@ class _DashboardState extends State<Dashboard> {
           return _updateData();
         },
         child: Center(
-          child: ListView(
-            children: <Widget>[
-              EndpointCard(
-                endpoint: Endpoint.cases,
-                value: _cases,
-              ),
-              EndpointCard(
-                endpoint: Endpoint.casesSuspected,
-                value: _data,
-              )
-            ],
-          ),
+          child: _endpointsData == null
+              ? const Center(child: CircularProgressIndicator())
+              : ListView(
+                  children: <Widget>[
+                    for (var endpoint in Endpoint.values)
+                      EndpointCard(
+                        endpoint: endpoint,
+                        value: _endpointsData != null
+                            ? _endpointsData!.values[endpoint]!
+                            : 0,
+                      ),
+                  ],
+                ),
         ),
       ),
     );
