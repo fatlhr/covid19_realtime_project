@@ -3,9 +3,16 @@ import 'package:covid19_realtime_project/app/repositories/data_repository.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
 import 'package:covid19_realtime_project/app/services/api_service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() async{
+  Intl.defaultLocale = 'en_US';
+  await initializeDateFormatting();
+  //Intl.getCurrentLocale();
+  return runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,7 +27,7 @@ class MyApp extends StatelessWidget {
         title: 'Cov19 Tracker',
         theme: ThemeData.dark().copyWith(
           cardColor: const Color(0xFF222222),
-          scaffoldBackgroundColor:const  Color(0xFF101010),
+          scaffoldBackgroundColor: const Color(0xFF101010),
         ),
         home: const Dashboard(),
       ),

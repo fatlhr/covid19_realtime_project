@@ -1,6 +1,7 @@
 import 'package:covid19_realtime_project/app/repositories/endpoint_data.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
 import 'package:covid19_realtime_project/app/services/api_service.dart';
+import 'package:covid19_realtime_project/app/services/endpoint_data.dart';
 
 import 'package:http/http.dart';
 
@@ -9,8 +10,8 @@ class DataRepository {
   final APIService apiService;
   String? _accessToken;
 
-  Future<int> getEndpointData(Endpoint endpoint) async {
-    return await _getDataRefreshingToken<int>(
+  Future<Endpointdata> getEndpointData(Endpoint endpoint) async {
+    return await _getDataRefreshingToken<Endpointdata>(
       onGetData: () => apiService.getEndPointData(
         accessToken: _accessToken!,
         endpoint: endpoint,

@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///Users/sagara-mac/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///Users/sagara-mac/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
       "packageUri": "lib/",
@@ -176,7 +182,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-06-26T02:55:20.091262Z",
+  "generated": "2022-06-26T12:23:26.805197Z",
   "generator": "pub",
   "generatorVersion": "2.14.0"
 }

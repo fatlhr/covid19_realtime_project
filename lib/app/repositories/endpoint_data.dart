@@ -1,14 +1,15 @@
 import 'package:covid19_realtime_project/app/services/api.dart';
+import 'package:covid19_realtime_project/app/services/endpoint_data.dart';
 
 class EndpointsData {
   EndpointsData({required this.values});
-  final Map<Endpoint, int> values;
+  final Map<Endpoint, Endpointdata> values;
 
-  int get cases => values[Endpoint.cases]!;
-  int get casesonfirmed => values[Endpoint.casesConfirmed]!;
-  int get casesSuspected => values[Endpoint.casesSuspected]!;
-  int get deaths => values[Endpoint.deaths]!;
-  int get recovered => values[Endpoint.recovered]!;
+  Endpointdata get cases => values[Endpoint.cases]!;
+  Endpointdata get casesonfirmed => values[Endpoint.casesConfirmed]!;
+  Endpointdata get casesSuspected => values[Endpoint.casesSuspected]!;
+  Endpointdata get deaths => values[Endpoint.deaths]!;
+  Endpointdata get recovered => values[Endpoint.recovered]!;
 
   @override
   String toString() {

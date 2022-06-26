@@ -1,6 +1,7 @@
 import 'package:covid19_realtime_project/app/repositories/endpoint_data.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EndpointCardData {
   const EndpointCardData({
@@ -32,6 +33,14 @@ class EndpointCard extends StatelessWidget {
     Endpoint.recovered:
         const EndpointCardData(title: "Recovered", color: Colors.green),
   };
+
+  String get formattedValue{
+    if (value == 0) {
+      return '0';
+    }
+    
+    return NumberFormat('#,###,###,###').format(value);
+  }
   @override
   Widget build(BuildContext context) {
     final EndpointCardData endpoindCardsData = cardsData[endpoint]!;
@@ -51,7 +60,7 @@ class EndpointCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                value.toString(),
+                formattedValue,
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
