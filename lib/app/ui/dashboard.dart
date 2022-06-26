@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:covid19_realtime_project/app/repositories/data_repository.dart';
 import 'package:covid19_realtime_project/app/repositories/endpoint_data.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
@@ -22,19 +24,25 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> _updateData() async {
-    final dataRepository = Provider.of<DataRepository>(context, listen: false);
-    final endpointsData = await dataRepository.getAllEndpointsData();
+    try {
+      final dataRepository =
+          Provider.of<DataRepository>(context, listen: false);
+      final endpointsData = await dataRepository.getAllEndpointsData();
 
-    setState(() {
-      _endpointsData = endpointsData;
-    });
+      setState(() {
+        _endpointsData = endpointsData;
+      });
+    } on SocketException catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final formatter = LastUpdatedDateFormatter(lastUpdated: _endpointsData != null
-                            ? _endpointsData!.values[Endpoint.cases]!.date
-                            : null);
+    final formatter = LastUpdatedDateFormatter(
+        lastUpdated: _endpointsData != null
+            ? _endpointsData!.values[Endpoint.cases]!.date
+            : null);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cov19 Tracker'),
