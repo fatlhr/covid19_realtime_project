@@ -39,6 +39,12 @@ class _DashboardState extends State<Dashboard> {
         'Network Error',
         'Please check your internet connection and try again.',
       );
+    } catch (_) {
+      showAlertDialog(
+        context,
+        'Unknown Error',
+        'An unknown error occurred. Please contact support.',
+      );
     }
   }
 
