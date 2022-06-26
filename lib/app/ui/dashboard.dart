@@ -5,6 +5,7 @@ import 'package:covid19_realtime_project/app/repositories/endpoint_data.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
 import 'package:covid19_realtime_project/app/ui/endpoint_card_widget.dart';
 import 'package:covid19_realtime_project/app/ui/last_updated_status_text.dart';
+import 'package:covid19_realtime_project/app/ui/show_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,11 @@ class _DashboardState extends State<Dashboard> {
         _endpointsData = endpointsData;
       });
     } on SocketException catch (e) {
-      debugPrint(e.toString());
+      showAlertDialog(
+        context,
+        'Network Error',
+        'Please check your internet connection and try again.',
+      );
     }
   }
 
