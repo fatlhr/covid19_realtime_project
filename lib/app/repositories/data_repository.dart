@@ -1,13 +1,15 @@
 import 'package:covid19_realtime_project/app/repositories/endpoint_data.dart';
 import 'package:covid19_realtime_project/app/services/api.dart';
 import 'package:covid19_realtime_project/app/services/api_service.dart';
+import 'package:covid19_realtime_project/app/services/data_cache_service.dart';
 import 'package:covid19_realtime_project/app/services/endpoint_data.dart';
 
 import 'package:http/http.dart';
 
 class DataRepository {
-  DataRepository({required this.apiService});
+  DataRepository({required this.apiService,required this.dataCacheService});
   final APIService apiService;
+  final DataCacheService dataCacheService;
   String? _accessToken;
 
   Future<Endpointdata> getEndpointData(Endpoint endpoint) async {
@@ -19,9 +21,16 @@ class DataRepository {
     );
   }
 
+  
+  EndpointsData getAllEndpointsCachedData() => dataCacheService.getData();
+
   Future<EndpointsData> getAllEndpointsData() async {
-    return await _getDataRefreshingToken<EndpointsData>(
-        onGetData: _getAllEndpointsData);
+    final endpointsData = await _getDataRefreshingToken<EndpointsData>(
+      onGetData: _getAllEndpointsData,
+    );
+    // save to cache
+    await dataCacheService.setData(endpointsData);
+    return endpointsData;
   }
 
   Future<T> _getDataRefreshingToken<T>(

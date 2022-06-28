@@ -17,10 +17,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  EndpointsData? _endpointsData;
+  late EndpointsData _endpointsData;
   @override
   void initState() {
     super.initState();
+    final dataRepository = Provider.of<DataRepository>(context, listen: false);
+    _endpointsData = dataRepository.getAllEndpointsCachedData();
     _updateData();
   }
 
@@ -51,9 +53,8 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     final formatter = LastUpdatedDateFormatter(
-        lastUpdated: _endpointsData != null
-            ? _endpointsData!.values[Endpoint.cases]!.date
-            : null);
+      lastUpdated: _endpointsData.values[Endpoint.cases]?.date,
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cov19 Tracker'),
@@ -64,18 +65,14 @@ class _DashboardState extends State<Dashboard> {
           return _updateData();
         },
         child: Center(
-          child: _endpointsData == null
-              ? const Center(child: CircularProgressIndicator())
-              : ListView(
+          child: ListView(
                   children: <Widget>[
                     LastUpdatedTextStatus(
                         lastUpdated: formatter.lastUpdatedStatusText()),
                     for (var endpoint in Endpoint.values)
                       EndpointCard(
                         endpoint: endpoint,
-                        value: _endpointsData != null
-                            ? _endpointsData!.values[endpoint]!.value
-                            : 0,
+                        value: _endpointsData.values[endpoint]?.value,
                       ),
                   ],
                 ),

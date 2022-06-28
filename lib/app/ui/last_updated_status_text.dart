@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class LastUpdatedDateFormatter {
-  const LastUpdatedDateFormatter({required this.lastUpdated});
+    LastUpdatedDateFormatter({required this.lastUpdated});
   final DateTime? lastUpdated;
   String lastUpdatedStatusText() {
     if (lastUpdated != null) {
       final formatter = DateFormat.yMd().add_Hms();
-      final formatted = formatter.format(lastUpdated!);
+     final formatted = formatter.format(lastUpdated!);
       return "Last updated: $formatted";
     }
     return "";
